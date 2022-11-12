@@ -1,27 +1,31 @@
-import { TagCloud } from "react-tagcloud";
+import ReactWordcloud from "react-wordcloud";
 import React, { useState, useEffect } from "react";
 
-const data = [
-  { value: "JavaScript", count: 38 },
-  { value: "React", count: 30 },
-  { value: "Nodejs", count: 28 },
-  { value: "Express.js", count: 25 },
-  { value: "HTML5", count: 33 },
-  { value: "MongoDB", count: 18 },
-  { value: "CSS3", count: 20 },
-];
-
+const options = {
+  enableTooltip: true,
+  deterministic: false,
+  fontFamily: "impact",
+  fontSizes: [32, 60],
+  fontStyle: "normal",
+  fontWeight: "normal",
+  padding: 1,
+  rotations: 3,
+  rotationAngles: [0, 90],
+  scale: "sqrt",
+  spiral: "archimedean",
+  transitionDuration: 1000,
+};
 export const SimpleCloud = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [words, setWords] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5056/api/WordCloud")
       .then((res) => res.json())
       .then(
         (data) => {
           setIsLoaded(true);
-          setUsers(data);
+          setWords(data);
         },
         (error) => {
           setIsLoaded(true);
@@ -34,14 +38,10 @@ export const SimpleCloud = () => {
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
-    console.log("ho" + users);
     return (
-      <TagCloud
-        minSize={12}
-        maxSize={35}
-        tags={data}
-        onClick={(tag) => alert(`'${tag.value}' was selected!`)}
-      />
+      <div style={{ width: "100%", height: "100%" }}>
+        <ReactWordcloud words={words} options={options} />
+      </div>
     );
   }
 };
