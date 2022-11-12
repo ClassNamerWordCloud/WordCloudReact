@@ -5,7 +5,7 @@ const options = {
   enableTooltip: true,
   deterministic: false,
   fontFamily: "impact",
-  fontSizes: [32, 60],
+  fontSizes: [5, 60],
   fontStyle: "normal",
   fontWeight: "normal",
   padding: 1,
@@ -15,7 +15,7 @@ const options = {
   spiral: "archimedean",
   transitionDuration: 1000,
 };
-export const SimpleCloud = () => {
+export const WordCloud = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [words, setWords] = useState([]);
@@ -39,7 +39,7 @@ export const SimpleCloud = () => {
     return <div>Loading...</div>;
   } else {
     return (
-      <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ height: "100%", width: "100%" }}>
         <ReactWordcloud words={words} options={options} />
       </div>
     );

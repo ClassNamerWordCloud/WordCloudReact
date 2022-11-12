@@ -1,8 +1,8 @@
 import "./App.css";
-import { SimpleCloud } from "./components/cloudWord";
+import { WordCloud } from "./components/cloudWord";
 
 function App() {
-  return <SimpleCloud />;
+  return <WordCloud />;
 }
 
 export default App;
